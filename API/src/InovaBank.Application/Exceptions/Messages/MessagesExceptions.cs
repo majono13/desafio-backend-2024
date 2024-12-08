@@ -9,4 +9,5 @@
     public const string UNKNOW_ERRROR = "Erro desconhecido";
     public const string EMAIL_REGISTERED = "E-mail já cadastrado.";
     public const string DOCUMENT_REGISTERED = "CNPJ já cadastrado.";
+    public const string EMAIL_OR_PASSWORD_INVALID = "E-mail ou senha inválido.";
 }

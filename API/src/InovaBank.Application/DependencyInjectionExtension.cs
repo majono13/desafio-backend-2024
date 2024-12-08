@@ -3,6 +3,7 @@ using InovaBank.Application.Services.Cryptography;
 using InovaBank.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using InovaBank.Application.UseCases.User.Login;
 
 namespace InovaBank.Application
 {
@@ -19,6 +20,7 @@ namespace InovaBank.Application
         private static void AddUseCases(IServiceCollection services)
         {
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }
 
         private static void AddAutoMapper(IServiceCollection services)
@@ -35,10 +37,9 @@ namespace InovaBank.Application
 
         private static void AddPasswordEncripter(IServiceCollection services, IConfiguration configuration)
         {
-            var additionalKey = configuration.GetSection("Settings:Password:AdditionalKey").Value;
             services.AddScoped(opt =>
             {
-                return new PasswordEncripter(additionalKey!);
+                return new PasswordEncripter();
             });
         }
     }

@@ -4,9 +4,9 @@ using InovaBank.Application.Exceptions.ExceptionsBase;
 using InovaBank.Application.Services.Cryptography;
 using InovaBank.Communication.Requests;
 using InovaBank.Communication.Responses;
-using InovaBank.Domain.Entities;
 using InovaBank.Domain.Repositories;
 using InovaBank.Domain.Repositories.User;
+using InovaBank.Domain.Security.Tokens;
 
 namespace InovaBank.Application.UseCases.User.Register
 {
@@ -17,19 +17,22 @@ namespace InovaBank.Application.UseCases.User.Register
         private readonly IMapper _mapper;
         private readonly PasswordEncripter _passwordEncripter;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAccessTokenGenerator _accessTokenGenerator;
 
         public RegisterUserUseCase(
             IUserWriteOnlyRepository userWriteOnlyRepository, 
             IUserReadOnlyRepository userReadOnlyRepository,
             IMapper mapper,
             PasswordEncripter passwordEncripter,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IAccessTokenGenerator accessTokenGenerator)
         {
             _userWriteOnlyRepository = userWriteOnlyRepository;
             _userReadOnlyRepository = userReadOnlyRepository;
             _mapper = mapper;
             _passwordEncripter = passwordEncripter;
             _unitOfWork = unitOfWork;
+            _accessTokenGenerator = accessTokenGenerator;
         }
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
@@ -37,7 +40,8 @@ namespace InovaBank.Application.UseCases.User.Register
             await Validate(request);
 
             var user = _mapper.Map<Domain.Entities.User>(request);
-            user.Password = _passwordEncripter.Encrypt(user.Password);
+            user.Password = _passwordEncripter.Encrypt(request.Password);
+            user.Id = Guid.NewGuid().ToString();
 
             await _userWriteOnlyRepository.Create(user);
 
@@ -45,7 +49,8 @@ namespace InovaBank.Application.UseCases.User.Register
 
             return new ResponseRegisteredUserJson
             {
-                email = request.Email
+                Email = request.Email,
+                Token = _accessTokenGenerator.Generate(user.Id)
             };
         }
 

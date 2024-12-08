@@ -22,5 +22,16 @@ namespace InovaBank.Infrastructure.DataAccess.Repositories
         {
             return await _dbContext.Users.AnyAsync(user => user.Email == email);
         }
+
+        public async Task<User?> GetByEmailAndPassword(string email, string password)
+        {
+            return await _dbContext.Users
+                .FirstOrDefaultAsync(user => user.Email.Equals(email) && user.Password.Equals(password));
+        }
+
+        public async Task<User?> GetById(string id)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == id);
+        }
     }
 }

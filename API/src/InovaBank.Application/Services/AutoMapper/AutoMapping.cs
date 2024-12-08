@@ -14,7 +14,6 @@ namespace InovaBank.Application.Services.AutoMapper
         private void RequestToDomain()
         {
             CreateMap<RequestRegisterUserJson, User>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
                 .ForMember(dest => dest.Password, opt => opt.Ignore()); //Ignoar senha
         }
     }

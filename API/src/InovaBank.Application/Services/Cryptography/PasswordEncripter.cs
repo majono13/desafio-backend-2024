@@ -5,17 +5,15 @@ namespace InovaBank.Application.Services.Cryptography
 {
     public class PasswordEncripter
     {
-        private readonly string _additionalString;
-        public PasswordEncripter(string additionalString)
+        public PasswordEncripter()
         {
-            _additionalString = additionalString;
         }
 
         public string Encrypt(string password)
         {
-            var newPassword =  $"{password}${_additionalString}";
 
-            var bytes = Encoding.UTF8.GetBytes(newPassword);
+            password = password.Trim();
+            var bytes = Encoding.UTF8.GetBytes(password);
             var hashBytes = SHA512.HashData(bytes);
 
             return StringBytes(hashBytes);
