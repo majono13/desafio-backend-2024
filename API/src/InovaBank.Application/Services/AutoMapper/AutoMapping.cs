@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using InovaBank.Communication.Requests;
+using InovaBank.Communication.Requests.Account;
+using InovaBank.Communication.Requests.User;
 using InovaBank.Domain.Entities;
 
 namespace InovaBank.Application.Services.AutoMapper
@@ -15,6 +16,8 @@ namespace InovaBank.Application.Services.AutoMapper
         {
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, opt => opt.Ignore()); //Ignoar senha
+
+            CreateMap<RequesteRegisterAccountJson, Domain.Entities.Account>();
         }
     }
 }

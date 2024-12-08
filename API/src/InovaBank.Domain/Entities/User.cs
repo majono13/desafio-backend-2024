@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InovaBank.Domain.Entities
+﻿namespace InovaBank.Domain.Entities
 {
     public class User : EntityBase
     {

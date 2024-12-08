@@ -1,12 +1,13 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using InovaBank.API.Filters;
-using InovaBank.API.Session;
+using InovaBank.API.TokenMiddleware;
 using InovaBank.Application;
 using InovaBank.Infrastructure;
 using InovaBank.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,9 +45,9 @@ builder.Services.AddAuthentication(authOptions =>
         };
     });
 
-builder.Services.AddScoped<CurrentUser>();
 
 var app = builder.Build();
+app.UseMiddleware<TokenMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

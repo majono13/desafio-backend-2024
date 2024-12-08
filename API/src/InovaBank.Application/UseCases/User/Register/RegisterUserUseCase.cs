@@ -1,9 +1,8 @@
-﻿using System.Text.RegularExpressions;
-using AutoMapper;
+﻿using AutoMapper;
 using InovaBank.Application.Exceptions.ExceptionsBase;
 using InovaBank.Application.Services.Cryptography;
-using InovaBank.Communication.Requests;
-using InovaBank.Communication.Responses;
+using InovaBank.Communication.Requests.User;
+using InovaBank.Communication.Responses.User;
 using InovaBank.Domain.Repositories;
 using InovaBank.Domain.Repositories.User;
 using InovaBank.Domain.Security.Tokens;
@@ -36,12 +35,10 @@ namespace InovaBank.Application.UseCases.User.Register
         }
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
-            
             await Validate(request);
 
             var user = _mapper.Map<Domain.Entities.User>(request);
             user.Password = _passwordEncripter.Encrypt(request.Password);
-            user.Id = Guid.NewGuid().ToString();
 
             await _userWriteOnlyRepository.Create(user);
 

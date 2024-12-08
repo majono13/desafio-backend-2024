@@ -1,7 +1,7 @@
 ﻿using InovaBank.Application.Exceptions.ExceptionsBase;
 using InovaBank.Application.Services.Cryptography;
-using InovaBank.Communication.Requests;
-using InovaBank.Communication.Responses;
+using InovaBank.Communication.Requests.User;
+using InovaBank.Communication.Responses.User;
 using InovaBank.Domain.Repositories.User;
 using InovaBank.Domain.Security.Tokens;
 

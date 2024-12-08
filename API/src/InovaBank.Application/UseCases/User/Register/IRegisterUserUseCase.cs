@@ -1,5 +1,5 @@
-﻿using InovaBank.Communication.Requests;
-using InovaBank.Communication.Responses;
+﻿using InovaBank.Communication.Requests.User;
+using InovaBank.Communication.Responses.User;
 
 namespace InovaBank.Application.UseCases.User.Register
 {

@@ -4,6 +4,10 @@ using InovaBank.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using InovaBank.Application.UseCases.User.Login;
+using InovaBank.Application.UserSession;
+using InovaBank.Application.UseCases.Account.Register;
+using InovaBank.Application.UseCases.Account.Update;
+using InovaBank.Application.UseCases.Account.Get;
 
 namespace InovaBank.Application
 {
@@ -21,6 +25,10 @@ namespace InovaBank.Application
         {
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+            services.AddScoped<IRegisterAccountUseCase, RegisterAccountUseCase>();
+            services.AddScoped<IUpdateAccountUseCase, UpdateAccountUseCase>();
+            services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
+            services.AddScoped<UserContext>();
         }
 
         private static void AddAutoMapper(IServiceCollection services)

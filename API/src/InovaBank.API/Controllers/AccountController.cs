@@ -1,6 +1,8 @@
-﻿using InovaBank.Application.UseCases.User.Register;
-using InovaBank.Communication.Requests;
-using InovaBank.Communication.Responses;
+﻿using InovaBank.Application.UseCases.Account.Get;
+using InovaBank.Application.UseCases.Account.Register;
+using InovaBank.Application.UseCases.Account.Update;
+using InovaBank.Communication.Requests.Account;
+using InovaBank.Communication.Responses.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +13,48 @@ namespace InovaBank.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        [HttpPost]
+        [ProducesResponseType(typeof(ResponseRegisterAccountJson), StatusCodes.Status201Created)]
+        public async Task<IActionResult> Register(
+            [FromServices] IRegisterAccountUseCase useCase,
+            [FromForm] RequesteRegisterAccountJson request
+            )
+        {
+            var result = await useCase.Execute(request);
+
+            return Created("", result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(ResponseRegisterAccountJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Update(
+            [FromServices] IUpdateAccountUseCase useCase,
+            [FromForm] RequesteRegisterAccountJson request
+            )
+        {
+            var result = await useCase.Execute(request);
+
+            return Ok(result);
+
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(
+            [FromServices] IUpdateAccountUseCase useCase,
+            [FromBody] RequestAccountJson request)
+        {
+            await useCase.MarkAsDeleted(request);
+            return Ok();
+        }
+
         [HttpGet]
-        public IActionResult Get() {
-            return Ok("Token Passou");
+        [ProducesResponseType(typeof(ResponseAccountJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAccount(
+            [FromServices] IGetAccountUseCase useCase,
+            [FromBody] RequestAccountJson request)
+        {
+            var result = await useCase.GetByAccountNumber(request);
+            return Ok(result);
         }
     }
 }

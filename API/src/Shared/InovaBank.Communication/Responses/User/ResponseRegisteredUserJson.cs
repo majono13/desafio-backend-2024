@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InovaBank.Communication.Responses
+namespace InovaBank.Communication.Responses.User
 {
     public class ResponseRegisteredUserJson
     {

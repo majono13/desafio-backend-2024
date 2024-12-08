@@ -1,7 +1,7 @@
 ﻿using InovaBank.Application.UseCases.User.Login;
 using InovaBank.Application.UseCases.User.Register;
-using InovaBank.Communication.Requests;
-using InovaBank.Communication.Responses;
+using InovaBank.Communication.Requests.User;
+using InovaBank.Communication.Responses.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InovaBank.API.Controllers

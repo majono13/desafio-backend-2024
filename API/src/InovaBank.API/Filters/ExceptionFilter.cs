@@ -37,12 +37,26 @@ namespace InovaBank.API.Filters
                     context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(context.Exception.Message));
                 }
             }
+            else if (context.Exception is ReceitaWSException)
+            {
+                {
+                    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;
+                    context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(context.Exception.Message));
+                }
+            }
+            else if (context.Exception is AccountNotFoundException)
+            {
+                {
+                    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    context.Result = new NotFoundObjectResult(new ResponseErrorJson(context.Exception.Message));
+                }
+            }
         }
 
         private void ThrowUnknowException(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            //context.Result = new ObjectResult(new ResponseErrorJson(ErrorsMessages.UNKNOW_ERRROR));
+            context.Result = new ObjectResult(new ResponseErrorJson(ErrorsMessages.UNKNOW_ERRROR));
         }
     }
 }

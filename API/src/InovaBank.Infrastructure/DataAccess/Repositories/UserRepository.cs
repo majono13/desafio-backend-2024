@@ -15,6 +15,7 @@ namespace InovaBank.Infrastructure.DataAccess.Repositories
 
         public async Task Create(User user)
         {
+            user.Id = Guid.NewGuid().ToString();
             await _dbContext.Users.AddAsync(user);
         }
 

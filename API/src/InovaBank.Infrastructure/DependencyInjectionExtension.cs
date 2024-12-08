@@ -9,6 +9,9 @@ using InovaBank.Infrastructure.Security.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using InovaBank.Domain.Repositories.Account;
+using InovaBank.Domain.Services.ReceitaWS;
+using InovaBank.Infrastructure.Services.ReceitaWS;
 
 namespace InovaBank.Infrastructure
 {
@@ -20,6 +23,7 @@ namespace InovaBank.Infrastructure
             AddToken(services, configuration);
             AddDbContext(services, configuration);
             AddFluentMigrator(services, configuration);
+            AddServices(services);
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
@@ -37,6 +41,8 @@ namespace InovaBank.Infrastructure
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAccountReadOnlyRepository, AccountReposiory>();
+            services.AddScoped<IAccountWriteOnlyRepository, AccountReposiory>();
         }
 
         private static void AddFluentMigrator(IServiceCollection services, IConfiguration configuration)
@@ -57,6 +63,11 @@ namespace InovaBank.Infrastructure
 
             services.AddScoped<IAccessTokenGenerator>(opt => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
             services.AddScoped<IJwtTokenDecoded, JwtTokenDecoded>();
+        }
+
+        private static void AddServices(IServiceCollection services)
+        {
+            services.AddScoped<IReceitaWS, ReceitaWS>();
         }
     }
 }
