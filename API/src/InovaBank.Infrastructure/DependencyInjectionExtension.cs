@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using InovaBank.Domain.Repositories.Account;
 using InovaBank.Domain.Services.ReceitaWS;
 using InovaBank.Infrastructure.Services.ReceitaWS;
+using InovaBank.Domain.Repositories.Transactions;
 
 namespace InovaBank.Infrastructure
 {
@@ -43,6 +44,8 @@ namespace InovaBank.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccountReadOnlyRepository, AccountReposiory>();
             services.AddScoped<IAccountWriteOnlyRepository, AccountReposiory>();
+            services.AddScoped<ItransactionsReadOnlyRepository, TransactionRepository>();
+            services.AddScoped<ITransactionsWriteOnlyRepository, TransactionRepository>();
         }
 
         private static void AddFluentMigrator(IServiceCollection services, IConfiguration configuration)

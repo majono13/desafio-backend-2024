@@ -16,8 +16,8 @@ namespace InovaBank.Infrastructure.Migrations.Versions
                 .WithColumn("accountNumber").AsString(8).Nullable()
                 .WithColumn("digit").AsString(1).Nullable()
                 .WithColumn("agency").AsString(4).Nullable()
-                .WithColumn("document").AsCustom("LONGBLOB ").Nullable()
-                .WithColumn("balance").AsInt64().Nullable()
+                .WithColumn("document").AsCustom("LONGTEXT").Nullable()
+                .WithColumn("balance").AsDecimal(10, 2).Nullable()
                 .WithColumn("active").AsBoolean().Nullable()
                 .WithColumn("userId").AsString(36).NotNullable().ForeignKey("FK_Account_User_Id", "users", "id");
 

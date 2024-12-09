@@ -8,5 +8,6 @@
         public Task<Entities.Account?> GetById(string id);
         public Task<bool> ExistsAccountWithCnpj(string cnpj);
         public Task<Entities.Account?> GetByAccount(string accountNumber);
+        public Task<Entities.Account?> GetAccountByInfo(string accountNumber, string digit, string agency);
     }
 }

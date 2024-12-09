@@ -29,6 +29,12 @@ namespace InovaBank.Infrastructure.DataAccess.Repositories
             return await _dbContext.Accounts.AnyAsync(account => account.Cnpj == cnpj);
         }
 
+        public async Task<Account?> GetAccountByInfo(string accountNumber, string digit, string agency)
+        {
+            return await _dbContext.Accounts.FirstOrDefaultAsync(account => 
+            account.AccountNumber == accountNumber  && account.Active);
+        }
+
         public async Task<Account?> GetActiveAccountUser(string userId)
         {
             return await _dbContext.Accounts.FirstOrDefaultAsync(account => account.UserId == userId && account.Active);

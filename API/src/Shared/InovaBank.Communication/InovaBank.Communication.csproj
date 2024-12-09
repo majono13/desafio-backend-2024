@@ -4,6 +4,10 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App"></FrameworkReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Responses\Transactions\" />
+	</ItemGroup>
+
 
 	<PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

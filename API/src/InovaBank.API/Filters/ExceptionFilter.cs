@@ -51,12 +51,20 @@ namespace InovaBank.API.Filters
                     context.Result = new NotFoundObjectResult(new ResponseErrorJson(context.Exception.Message));
                 }
             }
+
+            else if (context.Exception is InvalidTokenException)
+            {
+                {
+                    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(context.Exception.Message));
+                }
+            }
         }
 
         private void ThrowUnknowException(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            context.Result = new ObjectResult(new ResponseErrorJson(ErrorsMessages.UNKNOW_ERRROR));
+           // context.Result = new ObjectResult(new ResponseErrorJson(ErrorsMessages.UNKNOW_ERRROR));
         }
     }
 }

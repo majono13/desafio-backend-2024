@@ -16,4 +16,11 @@
     public const string CNPJ_NOT_FOUND = "CNPJ não encotrado.";
     public const string ACCOUNT_NOT_FOUND = "Conta não encontrada.";
     public const string INVALID_DOCUMENT = "Formato do documento inválido.O documento deve ser uma imagem.";
+    public const string DEPOSIT_VALUE_REQUIRED = "O valor do depósito é obrigatório.";
+    public const string ACCOUNT_REQUIRED = "O número da conta é obrigatório.";
+    public const string AGENCY_REQUIRED = "O número da agência é obrigatório.";
+    public const string DIGIT_REQUIRED = "O dígito da conta é obrigatório.";
+    public const string IVALID_TOKEN = "Token inválido.";
+    public const string INSUFFICIENT_BALANCE = "Saldo insuficiente.";
+    public const string INVALID_DESTINY = "A conta destino deve ser diferente da conta de origem.";
 }

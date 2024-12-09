@@ -9,7 +9,7 @@
         public string Digit { get; set; } = "";
         public string Agency { get; set; } = "";
         public string Document { get; set; } = "";
-        public long Balance { get; set; }
+        public decimal Balance { get; set; }
         public string Id { get; set; } = "";
     }
 }
