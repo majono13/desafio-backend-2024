@@ -87,6 +87,12 @@ namespace InovaBank.Application.UseCases.Transaction.Register
                 throw new AccountNotFoundException();
             }
 
+
+            if (account?.Balance < request.Value)
+            {
+                throw new ErrorOnValidationException([ErrorsMessages.INSUFFICIENT_BALANCE]);
+            }
+
             var transaction = CreateTransaction(request.Value, TransactionTypes.TypeOutput, null, account.Id, TransactionTypes.TypeWithdrawal);
 
             account.Balance -= request.Value;

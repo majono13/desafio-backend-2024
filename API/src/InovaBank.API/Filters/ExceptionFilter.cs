@@ -64,7 +64,7 @@ namespace InovaBank.API.Filters
         private void ThrowUnknowException(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-           // context.Result = new ObjectResult(new ResponseErrorJson(ErrorsMessages.UNKNOW_ERRROR));
+            context.Result = new ObjectResult(new ResponseErrorJson(ErrorsMessages.UNKNOW_ERRROR));
         }
     }
 }
